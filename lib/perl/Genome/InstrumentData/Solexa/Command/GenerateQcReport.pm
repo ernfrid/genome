@@ -78,7 +78,7 @@ sub execute {
             $bamqc_metrics->{'bam_qc-GcBiasSummary-WINDOW_SIZE-100-GC_DROPOUT'},
 
         ), "\n";
-        UR::Context->clear_cache(dont_unload => ['Genome::InstrumentData::Solexa']);
+        $inst_data->unload();
     }
     return 1;
 }
