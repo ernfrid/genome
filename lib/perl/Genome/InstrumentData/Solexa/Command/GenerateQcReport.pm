@@ -16,6 +16,7 @@ sub execute {
     my $iter = Genome::InstrumentData::Solexa->create_iterator(read_length => 151);
     print $self->header;
     while(my $inst_data = $iter->next) {
+        my $guard = UR::Context::AutoUnloadPool->create();
         next unless $inst_data->run_name =~ /E00/;
 
         my %attributes_hash = create_attributes_hash($inst_data);
@@ -77,7 +78,7 @@ sub execute {
             $bamqc_metrics->{'bam_qc-GcBiasSummary-WINDOW_SIZE-100-GC_DROPOUT'},
 
         ), "\n";
-
+        UR::Context->clear_cache(dont_unload => ['Genome::InstrumentData::Solexa']);
     }
     return 1;
 }
