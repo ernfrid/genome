@@ -57,7 +57,7 @@ sub execute {
             $bamqc_metrics->{'bam_qc-FlagstatMetrics-reads_mapped_percentage'},
             $bamqc_metrics->{'bam_qc-FlagstatMetrics-reads_mapped_in_proper_pairs_percentage'},
             $bamqc_metrics->{'bam_qc-FlagstatMetrics-reads_mapped_as_singleton_percentage'},
-            sprintf("%0.02f",$bamqc_metrics->{'bam_qc-FlagstatMetrics-hq_reads_mapped_in_interchromosomal_pairs'} / $bamqc_metrics->{'bam_qc-FlagstatMetrics-reads_mapped_in_pair'} * 100),
+            $bamqc_metrics->{'bam_qc-FlagstatMetrics-reads_mapped_in_pair'} ? sprintf("%0.02f",$bamqc_metrics->{'bam_qc-FlagstatMetrics-hq_reads_mapped_in_interchromosomal_pairs'} / $bamqc_metrics->{'bam_qc-FlagstatMetrics-reads_mapped_in_pair'} * 100) : 0,
             sprintf("%0.02f",$bamqc_metrics->{'bam_qc-AlignmentSummaryMetrics-CATEGORY-PAIR-PCT_PF_READS_ALIGNED'} * 100),
             sprintf("%0.02f",$bamqc_metrics->{'bam_qc-AlignmentSummaryMetrics-CATEGORY-PAIR-PCT_CHIMERAS'} * 100),
             sprintf("%0.02f",$bamqc_metrics->{'bam_qc-AlignmentSummaryMetrics-CATEGORY-PAIR-PF_HQ_ERROR_RATE'} * 100),
