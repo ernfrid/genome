@@ -146,10 +146,12 @@ sub header {
             "flow_cell_id",
             "lane",
             "run_date",
+            #info on what was run
             "index_sequence",
             "analysis_project",
             "sample_name",
             "library_name",
+            #basic production stats
             "fwd_read_length",
             "fwd_clusters",
             "fwd_kilobases_read",
@@ -162,6 +164,8 @@ sub header {
             "rev_avg_base_qscore",
             "rev_percent_bases_gt_q30",
             "rev_mismatch_rate",
+
+            #alignment metrics
             "flagstat_map_pct",
             "flagstat_map_as_proper_pair_pct",
             "flagstat_map_as_singleton_pct",
@@ -169,13 +173,16 @@ sub header {
             #alignments
             "alignment_summary_map_pct",
             "alignment_summary_pct_chimeras",
+            "alignment_summary_hq_error_rate",
             "alignment_summary_hq_indel_rate",
             "alignment_summary_mismatch_rate",
             "alignment_summary_strand_balance",
+            #insert size
             "median_insert_size",
             "median_absolute_deviation_insert_size",
             "mean_insert_size",
             "standard_deviation_insert_size",
+            #gc bias
             "at_dropout",
             "gc_dropout",
         ). "\n";
