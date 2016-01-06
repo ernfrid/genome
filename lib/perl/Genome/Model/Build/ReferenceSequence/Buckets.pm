@@ -47,10 +47,25 @@ sub bucket {
     return \@items;
 }
 
+sub _is_grch38_primary {
+    my $chr_name = shift;
+    # see ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/README.20150309.GRCh38_full_analysis_set_plus_decoy_hla
+    if ($chr_name =~ /(_alt|_patch|_decoy|EBV)$|^HLA-/) {
+        return 0;
+    }
+    else {
+        return 1;
+    }
+}
+
 sub _run {
     my $self = shift;
 
-    my $chr_lengths = $self->reference_sequence_build->chromosomes_with_lengths;
+    # The below is a horrible hack to generate buckets for my reference sequence
+    my $all_chr_lengths = $self->reference_sequence_build->chromosomes_with_lengths;
+    my @chromosomes_we_care_about = grep { _is_grch38_primary($_->[0]) } @$all_chr_lengths;
+    my $chr_lengths = \@chromosomes_we_care_about;
+
     my $max_length = max( map $_->[1], @$chr_lengths );
 
     my $bucketizer = Algorithm::Bucketizer->new(bucketsize => $max_length);
